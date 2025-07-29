@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Alexandr Zazulea - IT Specialist</title>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                font-family: 'Courier New', monospace;
+                background: linear-gradient(
+                    135deg,
+                    #0a0a0a 0%,
+                    #1a1a2e 50%,
+                    #16213e 100%
+                );
+                color: #00ff88;
+                min-height: 100vh;
+                overflow-x: hidden;
+            }
+            a {
+                font-family: 'Courier New', monospace;
+                background: linear-gradient(
+                    135deg,
+                    #0a0a0a 0%,
+                    #1a1a2e 50%,
+                    #16213e 100%
+                );
+                color: #00ff88;
+            }
+
+            .matrix-bg {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                z-index: -1;
+                opacity: 0.1;
+            }
+
+            .container {
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 20px;
+            }
+
+            .header {
+                text-align: center;
+                padding: 40px 0;
+                background: rgba(0, 255, 136, 0.05);
+                border: 1px solid rgba(0, 255, 136, 0.2);
+                border-radius: 20px;
+                backdrop-filter: blur(10px);
+                margin-bottom: 30px;
+                position: relative;
+                overflow: hidden;
+            }
+
+            .header::before {
+                content: '';
+                position: absolute;
+                top: -50%;
+                left: -50%;
+                width: 200%;
+                height: 200%;
+                background: linear-gradient(
+                    45deg,
+                    transparent,
+                    rgba(0, 255, 136, 0.1),
+                    transparent
+                );
+                animation: scan 3s linear infinite;
+            }
+
+            @keyframes scan {
+                0% {
+                    transform: translateX(-100%) translateY(-100%) rotate(45deg);
+                }
+                100% {
+                    transform: translateX(100%) translateY(100%) rotate(45deg);
+                }
+            }
+
+            .header h1 {
+                font-size: 3em;
+                margin-bottom: 10px;
+                text-shadow: 0 0 20px #00ff88;
+                animation: glow 2s ease-in-out infinite alternate;
+            }
+
+            @keyframes glow {
+                from {
+                    text-shadow: 0 0 20px #00ff88;
+                }
+                to {
+                    text-shadow: 0 0 30px #00ff88, 0 0 40px #00ff88;
+                }
+            }
+
+            .subtitle {
+                font-size: 1.2em;
+                color: #0099ff;
+                margin-bottom: 20px;
+            }
+
+            .contact-info {
+                display: flex;
+                justify-content: center;
+                gap: 30px;
+                flex-wrap: wrap;
+                margin-top: 20px;
+            }
+
+            .contact-item {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                padding: 8px 15px;
+                background: rgba(0, 153, 255, 0.1);
+                border: 1px solid rgba(0, 153, 255, 0.3);
+                border-radius: 25px;
+                transition: all 0.3s ease;
+            }
+
+            .contact-item:hover {
+                background: rgba(0, 153, 255, 0.2);
+                transform: translateY(-2px);
+                box-shadow: 0 5px 15px rgba(0, 153, 255, 0.3);
+            }
+
+            .section {
+                background: rgba(0, 0, 0, 0.6);
+                border: 1px solid rgba(0, 255, 136, 0.3);
+                border-radius: 15px;
+                padding: 30px;
+                margin-bottom: 30px;
+                backdrop-filter: blur(5px);
+                position: relative;
+                transition: all 0.3s ease;
+            }
+
+            .section:hover {
+                border-color: rgba(0, 255, 136, 0.6);
+                box-shadow: 0 0 30px rgba(0, 255, 136, 0.2);
+            }
+
+            .section-title {
+                font-size: 2em;
+                margin-bottom: 20px;
+                color: #0099ff;
+                border-bottom: 2px solid #0099ff;
+                padding-bottom: 10px;
+                position: relative;
+            }
+
+            .section-title::after {
+                content: '';
+                position: absolute;
+                bottom: -2px;
+                left: 0;
+                width: 0;
+                height: 2px;
+                background: #00ff88;
+                animation: loading 2s ease-in-out infinite;
+            }
+
+            @keyframes loading {
+                0%,
+                100% {
+                    width: 0;
+                }
+                50% {
+                    width: 100%;
+                }
+            }
+
+            .job {
+                margin-bottom: 25px;
+                padding: 20px;
+                background: rgba(0, 255, 136, 0.05);
+                border-left: 4px solid #00ff88;
+                border-radius: 8px;
+            }
+
+            .job-title {
+                font-size: 1.3em;
+                color: #00ff88;
+                margin-bottom: 5px;
+            }
+
+            .company {
+                color: #0099ff;
+                font-weight: bold;
+                margin-bottom: 5px;
+            }
+
+            .period {
+                color: #888;
+                font-size: 0.9em;
+                margin-bottom: 10px;
+            }
+
+            .skills-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 15px;
+            }
+
+            .skill-item {
+                background: rgba(0, 153, 255, 0.1);
+                border: 1px solid rgba(0, 153, 255, 0.3);
+                padding: 15px;
+                border-radius: 10px;
+                text-align: center;
+                transition: all 0.3s ease;
+                position: relative;
+                overflow: hidden;
+            }
+
+            .skill-item::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: -100%;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(
+                    90deg,
+                    transparent,
+                    rgba(0, 255, 136, 0.2),
+                    transparent
+                );
+                transition: left 0.5s ease;
+            }
+
+            .skill-item:hover::before {
+                left: 100%;
+            }
+
+            .skill-item:hover {
+                transform: scale(1.05);
+                border-color: #00ff88;
+                box-shadow: 0 5px 20px rgba(0, 255, 136, 0.3);
+            }
+
+            .terminal {
+                background: #000;
+                border: 1px solid #00ff88;
+                border-radius: 8px;
+                padding: 20px;
+                font-family: 'Courier New', monospace;
+                margin-top: 20px;
+            }
+
+            .terminal-header {
+                color: #0099ff;
+                margin-bottom: 10px;
+            }
+
+            .cursor {
+                animation: blink 1s infinite;
+            }
+
+            @keyframes blink {
+                0%,
+                50% {
+                    opacity: 1;
+                }
+                51%,
+                100% {
+                    opacity: 0;
+                }
+            }
+
+            .floating-icons {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                pointer-events: none;
+                z-index: -1;
+            }
+
+            .floating-icon {
+                position: absolute;
+                color: rgba(0, 255, 136, 0.3);
+                font-size: 20px;
+                animation: float 6s ease-in-out infinite;
+            }
+
+            @keyframes float {
+                0%,
+                100% {
+                    transform: translateY(0px) rotate(0deg);
+                }
+                50% {
+                    transform: translateY(-20px) rotate(180deg);
+                }
+            }
+
+            @media (max-width: 768px) {
+                .header h1 {
+                    font-size: 2em;
+                }
+                .contact-info {
+                    flex-direction: column;
+                    align-items: center;
+                }
+                .skills-grid {
+                    grid-template-columns: 1fr;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <canvas class="matrix-bg" id="matrixCanvas"></canvas>
+
+        <div class="floating-icons" id="floatingIcons"></div>
+
+        <div class="container">
+            <header class="header">
+                <h1>ALEXANDR ZAZULEA</h1>
+                <div class="subtitle">
+                    Junior Web Developer | Network Engineer | System
+                    Administrator
+                </div>
+                <p>
+                    IT specialist of a wide front. Website development of any
+                    complexity. Building an enterprise network. Enterprise
+                    administration.
+                </p>
+
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <span>📧</span>
+                        <span>zazuleaweb@gmail.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <span>📱</span>
+                        <span>+373 687 65 595</span>
+                    </div>
+                    <div class="contact-item">
+                        <span>@Zazull4</span>
+                    </div>
+                    <div class="contact-item">
+                        <span>#Zazull4</span>
+                    </div>
+                </div>
+            </header>
+
+            <section class="section">
+                <h2 class="section-title">WORK EXPERIENCE</h2>
+
+                <div class="job">
+                    <div class="job-title">Leading IT Specialist</div>
+                    <div class="company">SRL Balti-Gaz</div>
+                    <div class="period">2019 - present</div>
+                    <p>
+                        Setting up and administering Windows Server. Protection
+                        against hacking, viruses and information security
+                        support in the company. Direct participation in the
+                        design and construction of the local network.
+                        Maintaining enterprise web resources.
+                    </p>
+                </div>
+
+                <div class="job">
+                    <div class="job-title">Content Manager, SEO Specialist</div>
+                    <div class="company">SRL CitesBun</div>
+                    <div class="period">2016 - 2019</div>
+                    <p>
+                        Handling social media campaign and managing team to
+                        handling social media timeline upload
+                    </p>
+                </div>
+
+                <div class="job">
+                    <div class="job-title">Frontend Developer</div>
+                    <div class="company">Freelance (periodic)</div>
+                    <div class="period">2010 - present</div>
+                    <p>
+                        Web development projects including collaboration with
+                        international developers
+                    </p>
+                    <div class="terminal">
+                        <div class="terminal-header">
+                            ~/projects/latest_work $
+                        </div>
+                        <div>
+                            <a href="https://debridge.finance/"
+                                >https://debridge.finance/</a
+                            ><span class="cursor">_</span><br />
+                            <br />
+
+                            <a href="https://notcoin.my/">https://notcoin.my/</a
+                            ><span class="cursor">_</span><br />
+                            <br />
+                        </div>
+                    </div>
+                    <br />
+                    <br />
+                    <br />
+                    <div class="job-title">Frontend Developer</div>
+                    <div class="company">SRL "HumanSoft"</div>
+                    <div class="period">2023 - present</div>
+                    <p>
+                        Web development projects including collaboration with
+                        international developers
+                    </p>
+                    <div class="terminal">
+                        <div class="terminal-header">
+                            ~/projects/latest_work $
+                        </div>
+                        <div>
+                            <a href="https://talentisinterim.fr/"
+                                >https://talentisinterim.fr/</a
+                            ><span class="cursor">_</span><br />
+                            <br />
+                            <a href="https://agentia.md/">https://agentia.md/</a
+                            ><span class="cursor">_</span><br />
+                            <br />
+                            <a href="https://cetarom.md/">https://cetarom.md/</a
+                            ><span class="cursor">_</span> <br />
+                            <br />
+                            <a href="https://ara.md/">https://ara.md/</a
+                            ><span class="cursor">_</span><br />
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title">TECHNICAL SKILLS</h2>
+                <div class="skills-grid">
+                    <div class="skill-item">
+                        <h3>Frontend</h3>
+                        <p>HTML, CSS, JavaScript</p>
+                    </div>
+                    <div class="skill-item">
+                        <h3>Backend</h3>
+                        <p>PHP</p>
+                    </div>
+                    <div class="skill-item">
+                        <h3>CMS</h3>
+                        <p>WordPress</p>
+                    </div>
+                    <div class="skill-item">
+                        <h3>Networking</h3>
+                        <p>Mikrotik, Cisco</p>
+                    </div>
+                    <div class="skill-item">
+                        <h3>Server Admin</h3>
+                        <p>Windows Server (All versions)</p>
+                    </div>
+                    <div class="skill-item">
+                        <h3>Security</h3>
+                        <p>Security Audit</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title">EDUCATION</h2>
+                <div class="job">
+                    <div class="job-title">Higher Education - Psychologist</div>
+                    <div class="company">USARB</div>
+                    <div class="period">2007 - 2012</div>
+                </div>
+            </section>
+        </div>
+
+        <script>
+            // Matrix background effect
+            const canvas = document.getElementById('matrixCanvas');
+            const ctx = canvas.getContext('2d');
+
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            const matrix =
+                'ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789@#$%^&*()*&^%+-/~{[|`]}';
+            const matrixArray = matrix.split('');
+
+            const fontSize = 10;
+            const columns = canvas.width / fontSize;
+            const drops = [];
+
+            for (let x = 0; x < columns; x++) {
+                drops[x] = 1;
+            }
+
+            function drawMatrix() {
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.04)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                ctx.fillStyle = '#00ff88';
+                ctx.font = fontSize + 'px courier';
+
+                for (let i = 0; i < drops.length; i++) {
+                    const text =
+                        matrixArray[
+                            Math.floor(Math.random() * matrixArray.length)
+                        ];
+                    ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+                    if (
+                        drops[i] * fontSize > canvas.height &&
+                        Math.random() > 0.975
+                    ) {
+                        drops[i] = 0;
+                    }
+                    drops[i]++;
+                }
+            }
+
+            setInterval(drawMatrix, 35);
+
+            // Floating icons
+            const icons = ['💻', '🔧', '🌐', '🔒', '⚙️', '📡', '🚀', '💾'];
+            const floatingContainer = document.getElementById('floatingIcons');
+
+            function createFloatingIcon() {
+                const icon = document.createElement('div');
+                icon.className = 'floating-icon';
+                icon.textContent =
+                    icons[Math.floor(Math.random() * icons.length)];
+                icon.style.left = Math.random() * 100 + '%';
+                icon.style.top = Math.random() * 100 + '%';
+                icon.style.animationDelay = Math.random() * 6 + 's';
+                icon.style.animationDuration = Math.random() * 4 + 4 + 's';
+
+                floatingContainer.appendChild(icon);
+
+                setTimeout(() => {
+                    icon.remove();
+                }, 10000);
+            }
+
+            setInterval(createFloatingIcon, 2000);
+
+            // Resize canvas on window resize
+            window.addEventListener('resize', () => {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            });
+
+            // Add glitch effect to title on click
+            document
+                .querySelector('.header h1')
+                .addEventListener('click', function () {
+                    this.style.animation = 'none';
+                    this.style.transform = 'scale(1.1)';
+                    this.style.textShadow = '2px 0 #ff0000, -2px 0 #0000ff';
+
+                    setTimeout(() => {
+                        this.style.animation =
+                            'glow 2s ease-in-out infinite alternate';
+                        this.style.transform = 'scale(1)';
+                        this.style.textShadow = '0 0 20px #00ff88';
+                    }, 200);
+                });
+        </script>
+    </body>
+</html>
