@@ -80,6 +80,32 @@
                 animation: scan 3s linear infinite;
             }
 
+            .header-profile {
+                position: relative;
+                z-index: 1;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 30px;
+            }
+
+            .profile-photo {
+                width: 150px;
+                height: 150px;
+                flex: 0 0 150px;
+                object-fit: cover;
+                object-position: center 30%;
+                border: 3px solid #00ff88;
+                border-radius: 50%;
+                box-shadow:
+                    0 0 20px rgba(0, 255, 136, 0.6),
+                    0 0 40px rgba(0, 153, 255, 0.25);
+            }
+
+            .profile-details {
+                max-width: 800px;
+            }
+
             @keyframes scan {
                 0% {
                     transform: translateX(-100%) translateY(-100%) rotate(45deg);
@@ -313,6 +339,15 @@
                 .header h1 {
                     font-size: 2em;
                 }
+                .header-profile {
+                    flex-direction: column;
+                    gap: 20px;
+                }
+                .profile-photo {
+                    width: 120px;
+                    height: 120px;
+                    flex-basis: 120px;
+                }
                 .contact-info {
                     flex-direction: column;
                     align-items: center;
@@ -336,6 +371,13 @@
 
         <div class="container">
             <header class="header">
+                <div class="header-profile">
+                    <img
+                        class="profile-photo"
+                        src="img.jpg"
+                        alt="Portrait of Alexandr Zazulea"
+                    />
+                    <div class="profile-details">
                 <h1>ALEXANDR ZAZULEA</h1>
                 <div class="subtitle">
                     Mid Web Developer | Jun System Administrator | Base SEO
@@ -374,6 +416,7 @@
                                 style="width: 100%; max-width: 20px"
                         /></span>
                         <span>@Zazull4</span>
+                    </div>
                     </div>
                 </div>
             </header>
