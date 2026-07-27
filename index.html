@@ -2,698 +2,979 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Alexandr Zazulea - IT Specialist</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="theme-color" content="#121b36" />
+        <title>Alexandr Zazulea - Digital CV</title>
         <style>
+            :root {
+                --black: #050807;
+                --navy: #121b36;
+                --terminal: #060908;
+                --terminal-bar: #113f43;
+                --grid: rgba(13, 121, 142, 0.25);
+                --green: #00f59a;
+                --blue: #00aaf7;
+                --white: #f4f6f6;
+                --grey: #9aa1a4;
+                --line: rgba(20, 159, 183, 0.55);
+                --mono: 'Courier New', Courier, monospace;
+                --sans: Arial, Helvetica, sans-serif;
+            }
+
             * {
-                margin: 0;
-                padding: 0;
                 box-sizing: border-box;
             }
 
+            html {
+                scroll-behavior: smooth;
+            }
+
             body {
-                font-family: 'Courier New', monospace;
-                background: linear-gradient(
-                    135deg,
-                    #0a0a0a 0%,
-                    #1a1a2e 50%,
-                    #16213e 100%
-                );
-                color: #00ff88;
-                min-height: 100vh;
-                overflow-x: hidden;
+                min-width: 320px;
+                margin: 0;
+                color: var(--white);
+                font-family: var(--sans);
+                background-color: var(--navy);
+                background-image:
+                    linear-gradient(var(--grid) 1px, transparent 1px),
+                    linear-gradient(90deg, var(--grid) 1px, transparent 1px),
+                    linear-gradient(90deg, var(--black) 0 39%, transparent 39%);
+                background-size:
+                    56px 56px,
+                    56px 56px,
+                    100% 100%;
+                background-attachment: fixed;
             }
 
             a {
-                font-family: 'Courier New', monospace;
-                background: linear-gradient(
-                    135deg,
-                    #0a0a0a 0%,
-                    #1a1a2e 50%,
-                    #16213e 100%
-                );
-                color: #00ff88;
-                word-wrap: break-word;
+                color: var(--blue);
+                text-decoration: none;
+            }
+            a:hover,
+            a:focus-visible {
+                text-decoration: underline;
+            }
+            p,
+            a {
+                overflow-wrap: anywhere;
             }
 
-            .matrix-bg {
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                z-index: -1;
-                opacity: 0.1;
-            }
-
-            .container {
-                max-width: 1200px;
+            .sheet {
+                width: min(1120px, calc(100% - 44px));
                 margin: 0 auto;
-                padding: 20px;
+                padding: 76px 0 48px;
             }
 
-            .header {
-                text-align: center;
-                padding: 40px 0;
-                background: rgba(0, 255, 136, 0.05);
-                border: 1px solid rgba(0, 255, 136, 0.2);
-                border-radius: 20px;
-                backdrop-filter: blur(10px);
-                margin-bottom: 30px;
-                position: relative;
+            .brand {
+                margin-left: 2px;
+                font-family: var(--mono);
+            }
+
+            .brand-name {
+                margin: 0 0 13px;
+                color: var(--green);
+                font-size: 16px;
+                font-weight: 700;
+            }
+
+            .brand-role {
+                margin: 0;
+                color: var(--blue);
+                font-size: 14px;
+            }
+
+            .masthead {
+                display: grid;
+                grid-template-columns: minmax(0, 1fr) 260px;
+                column-gap: 46px;
+                align-items: start;
+            }
+
+            .masthead-main {
+                min-width: 0;
+            }
+
+            .hero-copy {
+                min-width: 0;
+                padding: 24px 0 8px;
+            }
+
+            .hero-side {
+                display: grid;
+                gap: 16px;
+            }
+
+            h1 {
+                margin: 40px 0 24px;
+                font-size: clamp(54px, 7.2vw, 90px);
+                line-height: 0.91;
+                letter-spacing: -0.06em;
+            }
+
+            h1 span {
+                display: block;
+                font-size: 0.58em;
+                line-height: 1.08;
+                letter-spacing: -0.042em;
+            }
+
+            .hero-copy p {
+                max-width: 610px;
+                margin: 0;
+                color: var(--grey);
+                font-size: 19px;
+                line-height: 1.55;
+            }
+
+            .signal {
+                width: 100%;
+                height: 178px;
                 overflow: hidden;
+                border: 1px solid rgba(20, 159, 183, 0.55);
+                background: rgba(5, 8, 7, 0.16);
             }
 
-            .header::before {
-                content: '';
-                position: absolute;
-                top: -50%;
-                left: -50%;
-                width: 200%;
-                height: 200%;
-                background: linear-gradient(
-                    45deg,
-                    transparent,
-                    rgba(0, 255, 136, 0.1),
-                    transparent
-                );
-                animation: scan 3s linear infinite;
-            }
-
-            .header-profile {
-                position: relative;
-                z-index: 1;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                gap: 30px;
-            }
-
-            .profile-photo {
-                width: 150px;
-                height: 150px;
-                flex: 0 0 150px;
-                object-fit: cover;
-                object-position: center 30%;
-                border: 3px solid #00ff88;
-                border-radius: 50%;
-                box-shadow:
-                    0 0 20px rgba(0, 255, 136, 0.6),
-                    0 0 40px rgba(0, 153, 255, 0.25);
-            }
-
-            .profile-details {
-                max-width: 800px;
-            }
-
-            @keyframes scan {
-                0% {
-                    transform: translateX(-100%) translateY(-100%) rotate(45deg);
-                }
-                100% {
-                    transform: translateX(100%) translateY(100%) rotate(45deg);
-                }
-            }
-
-            .header h1 {
-                font-size: 3em;
-                margin-bottom: 10px;
-                text-shadow: 0 0 20px #00ff88;
-                animation: glow 2s ease-in-out infinite alternate;
-            }
-
-            @keyframes glow {
-                from {
-                    text-shadow: 0 0 20px #00ff88;
-                }
-                to {
-                    text-shadow:
-                        0 0 30px #00ff88,
-                        0 0 40px #00ff88;
-                }
-            }
-
-            .subtitle {
-                font-size: 1.2em;
-                color: #0099ff;
-                margin-bottom: 20px;
-            }
-
-            .contact-info {
-                display: flex;
-                justify-content: center;
-                gap: 30px;
-                flex-wrap: wrap;
-                margin-top: 20px;
-            }
-
-            .contact-item {
+            .signal-head {
                 display: flex;
                 align-items: center;
                 gap: 8px;
-                padding: 8px 15px;
-                background: rgba(0, 153, 255, 0.1);
-                border: 1px solid rgba(0, 153, 255, 0.3);
-                border-radius: 25px;
-                transition: all 0.3s ease;
+                height: 34px;
+                padding: 0 12px;
+                border-bottom: 1px solid rgba(20, 159, 183, 0.42);
+                color: var(--blue);
+                font: 11px/1 var(--mono);
+                letter-spacing: 0.06em;
             }
 
-            .contact-item:hover {
-                background: rgba(0, 153, 255, 0.2);
-                transform: translateY(-2px);
-                box-shadow: 0 5px 15px rgba(0, 153, 255, 0.3);
+            .signal-head::before {
+                content: '';
+                width: 7px;
+                height: 7px;
+                border-radius: 50%;
+                background: var(--green);
+                box-shadow: 0 0 10px rgba(0, 245, 154, 0.7);
             }
 
-            .section {
-                background: rgba(0, 0, 0, 0.6);
-                border: 1px solid rgba(0, 255, 136, 0.3);
-                border-radius: 15px;
-                padding: 30px;
-                margin-bottom: 30px;
-                backdrop-filter: blur(5px);
+            .signal-stage {
                 position: relative;
-                transition: all 0.3s ease;
+                height: calc(100% - 34px);
+                background-image:
+                    linear-gradient(
+                        115deg,
+                        transparent 0 28%,
+                        rgba(0, 245, 154, 0.28) 28.3% 28.8%,
+                        transparent 29.1% 100%
+                    ),
+                    linear-gradient(
+                        17deg,
+                        transparent 0 49%,
+                        rgba(0, 170, 247, 0.23) 49.3% 49.8%,
+                        transparent 50.1% 100%
+                    ),
+                    linear-gradient(
+                        90deg,
+                        transparent 0 68%,
+                        rgba(0, 245, 154, 0.2) 68.3% 68.8%,
+                        transparent 69.1% 100%
+                    );
             }
 
-            .section:hover {
-                border-color: rgba(0, 255, 136, 0.6);
-                box-shadow: 0 0 30px rgba(0, 255, 136, 0.2);
-            }
-
-            .section-title {
-                font-size: 2em;
-                margin-bottom: 20px;
-                color: #0099ff;
-                border-bottom: 2px solid #0099ff;
-                padding-bottom: 10px;
-                position: relative;
-            }
-
-            .section-title::after {
+            .signal-stage::after {
                 content: '';
                 position: absolute;
-                bottom: -2px;
-                left: 0;
-                width: 0;
-                height: 2px;
-                background: #00ff88;
-                animation: loading 2s ease-in-out infinite;
-            }
-
-            @keyframes loading {
-                0%,
-                100% {
-                    width: 0;
-                }
-                50% {
-                    width: 100%;
-                }
-            }
-
-            .job {
-                margin-bottom: 25px;
-                padding: 20px;
-                background: rgba(0, 255, 136, 0.05);
-                border-left: 4px solid #00ff88;
-                border-radius: 8px;
-            }
-
-            .job-title {
-                font-size: 1.3em;
-                color: #00ff88;
-                margin-bottom: 5px;
-            }
-
-            .company {
-                color: #0099ff;
-                font-weight: bold;
-                margin-bottom: 5px;
-            }
-
-            .period {
-                color: #888;
-                font-size: 0.9em;
-                margin-bottom: 10px;
-            }
-
-            .skills-grid {
-                display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-                gap: 15px;
-            }
-
-            .skill-item {
-                background: rgba(0, 153, 255, 0.1);
-                border: 1px solid rgba(0, 153, 255, 0.3);
-                padding: 15px;
-                border-radius: 10px;
-                text-align: center;
-                transition: all 0.3s ease;
-                position: relative;
-                overflow: hidden;
-            }
-
-            .skill-item::before {
-                content: '';
-                position: absolute;
-                top: 0;
-                left: -100%;
-                width: 100%;
-                height: 100%;
+                inset: 0 auto 0 -35%;
+                width: 26%;
                 background: linear-gradient(
                     90deg,
                     transparent,
-                    rgba(0, 255, 136, 0.2),
+                    rgba(0, 245, 154, 0.18),
                     transparent
                 );
-                transition: left 0.5s ease;
+                transform: skewX(-24deg);
+                animation: signal-scan 5s linear infinite;
             }
 
-            .skill-item:hover::before {
-                left: 100%;
+            .node {
+                position: absolute;
+                width: 9px;
+                height: 9px;
+                border: 1px solid var(--green);
+                border-radius: 50%;
+                background: var(--navy);
+                box-shadow: 0 0 0 0 rgba(0, 245, 154, 0.56);
+                animation: node-pulse 3.2s ease-out infinite;
             }
 
-            .skill-item:hover {
-                transform: scale(1.05);
-                border-color: #00ff88;
-                box-shadow: 0 5px 20px rgba(0, 255, 136, 0.3);
+            .node::after {
+                content: attr(data-id);
+                position: absolute;
+                top: 12px;
+                left: 8px;
+                color: rgba(154, 161, 164, 0.75);
+                font: 9px/1 var(--mono);
+                white-space: nowrap;
+            }
+
+            .node-a {
+                top: 25%;
+                left: 17%;
+                animation-delay: 0s;
+            }
+            .node-b {
+                top: 64%;
+                left: 43%;
+                animation-delay: 1.05s;
+            }
+            .node-c {
+                top: 20%;
+                left: 69%;
+                animation-delay: 2.1s;
+            }
+            .node-d {
+                top: 69%;
+                left: 84%;
+                animation-delay: 1.6s;
+            }
+
+            .portrait {
+                width: 100%;
+                margin: 0;
+                padding: 8px;
+                border: 1px solid rgba(20, 159, 183, 0.7);
+                background: rgba(5, 8, 7, 0.82);
+            }
+
+            .portrait img {
+                display: block;
+                width: 100%;
+                aspect-ratio: 4 / 5;
+                object-fit: cover;
+                object-position: center 22%;
+            }
+
+            .portrait figcaption {
+                padding-top: 8px;
+                color: var(--green);
+                font: 10px/1.35 var(--mono);
+                white-space: nowrap;
+            }
+
+            @keyframes signal-scan {
+                from {
+                    transform: translateX(0) skewX(-24deg);
+                }
+                to {
+                    transform: translateX(520%) skewX(-24deg);
+                }
+            }
+
+            @keyframes node-pulse {
+                0%,
+                72%,
+                100% {
+                    box-shadow: 0 0 0 0 rgba(0, 245, 154, 0);
+                    background: var(--navy);
+                }
+                14% {
+                    box-shadow: 0 0 0 12px rgba(0, 245, 154, 0);
+                    background: var(--green);
+                }
+                28% {
+                    box-shadow: 0 0 0 18px rgba(0, 245, 154, 0);
+                    background: var(--navy);
+                }
             }
 
             .terminal {
-                background: #000;
-                border: 1px solid #00ff88;
+                overflow: hidden;
+                border: 2px solid var(--green);
+                border-radius: 13px;
+                background: var(--terminal);
+            }
+
+            .terminal-top {
+                display: flex;
+                align-items: center;
+                gap: 9px;
+                min-height: 35px;
+                padding: 0 15px;
+                background: var(--terminal-bar);
+                color: #8da8aa;
+                font: 11px/1 var(--mono);
+                letter-spacing: 0.05em;
+            }
+
+            .dot {
+                width: 10px;
+                height: 10px;
+                border-radius: 50%;
+                background: var(--green);
+            }
+            .dot-blue {
+                background: var(--blue);
+            }
+
+            .terminal-body {
+                padding: 22px 25px;
+            }
+
+            .terminal-command {
+                margin: 0;
+                color: var(--green);
+                font: 700 16px/1.4 var(--mono);
+            }
+
+            .terminal-command::before {
+                content: '> ';
+            }
+
+            .open-cv {
+                width: min(550px, 100%);
+                margin: 28px 0 84px;
+            }
+
+            .open-cv .terminal-body {
+                display: flex;
+                align-items: end;
+                justify-content: space-between;
+                gap: 20px;
+            }
+            .open-cv .terminal-body > div {
+                min-width: 0;
+            }
+            .open-cv small {
+                display: block;
+                margin-top: 8px;
+                color: var(--green);
+                font: 13px/1.3 var(--mono);
+            }
+            .open-cv a {
+                flex: 0 0 auto;
+                color: var(--blue);
+                font: 700 13px/1 var(--mono);
+                letter-spacing: 0.05em;
+                white-space: nowrap;
+            }
+
+            .cv-layout {
+                display: grid;
+                grid-template-columns: minmax(220px, 28%) minmax(0, 1fr);
+                gap: 28px;
+                align-items: start;
+            }
+
+            .side {
+                display: grid;
+                gap: 20px;
+                position: sticky;
+                top: 25px;
+            }
+
+            .side .terminal {
+                border-width: 1px;
+                border-color: var(--line);
+                border-radius: 0;
+            }
+            .side .terminal-top {
+                background: rgba(17, 63, 67, 0.72);
+            }
+            .side .terminal-body {
+                padding: 18px;
+            }
+
+            .side h2,
+            .side h3 {
+                margin: 0 0 13px;
+                color: var(--green);
+                font: 700 13px/1.35 var(--mono);
+                text-transform: uppercase;
+            }
+
+            .side h2::before,
+            .side h3::before {
+                content: '$ ';
+                color: var(--blue);
+            }
+
+            .contact-list,
+            .meta-list {
+                display: grid;
+                gap: 11px;
+                margin: 0;
+            }
+            .contact-list div,
+            .meta-list div {
+                font: 12px/1.4 var(--mono);
+            }
+            .contact-list dt,
+            .meta-list dt {
+                color: var(--grey);
+            }
+            .contact-list dd,
+            .meta-list dd {
+                margin: 2px 0 0;
+            }
+
+            .main {
+                min-width: 0;
+            }
+
+            .section {
+                margin: 0 0 56px;
+            }
+
+            .section-title {
+                display: flex;
+                align-items: center;
+                gap: 15px;
+                margin: 0 0 19px;
+                color: var(--white);
+            }
+
+            .section-title span {
+                color: var(--green);
+                font: 12px/1 var(--mono);
+            }
+            .section-title h2 {
+                margin: 0;
+                font-size: 30px;
+                line-height: 1;
+                letter-spacing: -0.04em;
+            }
+            .section-title::after {
+                content: '';
+                flex: 1;
+                height: 1px;
+                background: var(--line);
+            }
+
+            .experience {
+                display: grid;
+                gap: 16px;
+            }
+
+            .job {
+                position: relative;
+                display: grid;
+                grid-template-columns: 145px minmax(0, 1fr);
+                gap: 24px;
+                padding: 52px 22px 22px;
+                border: 1px solid var(--green);
                 border-radius: 8px;
-                padding: 20px;
-                font-family: 'Courier New', monospace;
-                margin-top: 20px;
+                background: rgba(5, 8, 7, 0.86);
             }
 
-            .terminal-header {
-                color: #0099ff;
-                margin-bottom: 10px;
-            }
-
-            .cursor {
-                animation: blink 1s infinite;
-            }
-
-            @keyframes blink {
-                0%,
-                50% {
-                    opacity: 1;
-                }
-                51%,
-                100% {
-                    opacity: 0;
-                }
-            }
-
-            .floating-icons {
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                pointer-events: none;
-                z-index: -1;
-            }
-
-            .floating-icon {
+            .job::before {
+                content: 'terminal - experience';
                 position: absolute;
-                color: rgba(0, 255, 136, 0.3);
-                font-size: 20px;
-                animation: float 6s ease-in-out infinite;
+                inset: 0 0 auto;
+                min-height: 30px;
+                padding: 10px 14px 0 42px;
+                border-bottom: 1px solid rgba(0, 245, 154, 0.5);
+                background:
+                    radial-gradient(
+                        circle at 18px 15px,
+                        var(--green) 0 5px,
+                        transparent 5.5px
+                    ),
+                    radial-gradient(
+                        circle at 34px 15px,
+                        var(--blue) 0 5px,
+                        transparent 5.5px
+                    ),
+                    var(--terminal-bar);
+                color: #8da8aa;
+                font: 10px/1 var(--mono);
+                letter-spacing: 0.05em;
             }
 
-            @keyframes float {
-                0%,
-                100% {
-                    transform: translateY(0px) rotate(0deg);
-                }
-                50% {
-                    transform: translateY(-20px) rotate(180deg);
-                }
+            .job-date {
+                color: var(--blue);
+                font: 12px/1.45 var(--mono);
+            }
+            .job-company {
+                margin-top: 7px;
+                color: var(--green);
+                font: 700 12px/1.35 var(--mono);
+            }
+            .job h3 {
+                margin: 0 0 8px;
+                font-size: 19px;
+                line-height: 1.22;
+            }
+            .job p {
+                margin: 0;
+                color: var(--grey);
+                font-size: 15px;
+                line-height: 1.55;
             }
 
-            @media (max-width: 768px) {
-                .header h1 {
-                    font-size: 2em;
+            .project-links {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 6px 15px;
+                margin-top: 17px;
+                padding-top: 15px;
+                border-top: 1px solid rgba(20, 159, 183, 0.27);
+                font: 12px/1.55 var(--mono);
+            }
+
+            .project-links b {
+                flex-basis: 100%;
+                color: var(--green);
+            }
+
+            .skills {
+                display: grid;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 16px;
+            }
+            .skill {
+                overflow: hidden;
+                border: 1px solid var(--green);
+                border-radius: 8px;
+                background: rgba(5, 8, 7, 0.86);
+            }
+            .skill-label {
+                padding: 12px 16px;
+                border-bottom: 1px solid rgba(0, 245, 154, 0.5);
+                background: var(--terminal-bar);
+                color: var(--green);
+                font: 700 13px/1 var(--mono);
+            }
+            .skill-label::before {
+                content: '$ ';
+                color: var(--blue);
+            }
+            .skill p {
+                margin: 0;
+                padding: 16px;
+                color: var(--grey);
+                font-size: 14px;
+                line-height: 1.5;
+            }
+
+            .education {
+                padding: 21px 22px;
+                border-left: 2px solid var(--green);
+                background: rgba(5, 8, 7, 0.86);
+            }
+            .education h3 {
+                margin: 0 0 7px;
+                font-size: 19px;
+            }
+            .education p {
+                margin: 0;
+                color: var(--grey);
+                font-size: 14px;
+            }
+            .education time {
+                display: block;
+                margin-top: 13px;
+                color: var(--blue);
+                font: 12px/1 var(--mono);
+            }
+
+            footer {
+                display: flex;
+                justify-content: space-between;
+                gap: 20px;
+                margin-top: 35px;
+                padding-top: 19px;
+                border-top: 1px solid var(--line);
+                color: var(--grey);
+                font: 11px/1.5 var(--mono);
+                text-transform: uppercase;
+            }
+
+            @media (max-width: 760px) {
+                body {
+                    background-image:
+                        linear-gradient(var(--grid) 1px, transparent 1px),
+                        linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+                    background-size: 42px 42px;
                 }
-                .header-profile {
-                    flex-direction: column;
-                    gap: 20px;
+
+                .sheet {
+                    width: min(100% - 30px, 600px);
+                    padding: 34px 0;
                 }
-                .profile-photo {
-                    width: 120px;
-                    height: 120px;
-                    flex-basis: 120px;
+                .brand-name {
+                    font-size: 14px;
                 }
-                .contact-info {
-                    flex-direction: column;
-                    align-items: center;
+                .brand-role {
+                    font-size: 12px;
                 }
-                .skills-grid {
+                .masthead {
+                    display: block;
+                }
+                .hero-copy {
+                    padding: 30px 0 0;
+                }
+                .hero-side {
+                    display: block;
+                    margin-top: 28px;
+                }
+                .signal {
+                    display: none;
+                }
+                .portrait {
+                    width: 180px;
+                }
+                h1 {
+                    font-size: clamp(46px, 15vw, 68px);
+                }
+                h1 span {
+                    font-size: 0.52em;
+                }
+                .hero-copy p {
+                    font-size: 17px;
+                }
+                .open-cv {
+                    margin: 39px 0 52px;
+                }
+                .open-cv .terminal-body {
+                    padding: 18px;
+                }
+                .cv-layout {
+                    grid-template-columns: 1fr;
+                    gap: 46px;
+                }
+                .side {
+                    position: static;
+                    grid-template-columns: 1fr 1fr;
+                }
+                .main {
+                    order: -1;
+                }
+                .job {
+                    grid-template-columns: 1fr;
+                    gap: 12px;
+                    padding: 25px 15px;
+                }
+                .skills {
                     grid-template-columns: 1fr;
                 }
-                header {
-                    padding: 10px 5px !important;
+                footer {
+                    flex-direction: column;
                 }
-                section {
-                    padding: 15px !important;
+            }
+
+            @media (max-width: 480px) {
+                .side {
+                    grid-template-columns: 1fr;
+                }
+                .section-title h2 {
+                    font-size: 27px;
+                }
+                .section-title {
+                    gap: 10px;
+                }
+            }
+
+            @media (prefers-reduced-motion: reduce) {
+                html {
+                    scroll-behavior: auto;
+                }
+                .signal-stage::after,
+                .node {
+                    animation: none;
                 }
             }
         </style>
     </head>
     <body>
-        <canvas class="matrix-bg" id="matrixCanvas"></canvas>
-
-        <div class="floating-icons" id="floatingIcons"></div>
-
-        <div class="container">
-            <header class="header">
-                <div class="header-profile">
-                    <img
-                        class="profile-photo"
-                        src="img.jpg"
-                        alt="Portrait of Alexandr Zazulea"
-                    />
-                    <div class="profile-details">
-                <h1>ALEXANDR ZAZULEA</h1>
-                <div class="subtitle">
-                    Mid Web Developer | Jun System Administrator | Base SEO
-                    Specialist
+        <main class="sheet">
+            <header class="masthead">
+                <div class="masthead-main">
+                    <div class="brand">
+                        <p class="brand-name">ALEXANDR ZAZULEA</p>
+                        <p class="brand-role">DIGITAL CV / PORTFOLIO</p>
+                    </div>
+                    <div class="hero-copy">
+                        <h1>Hello.<span>My CV is ready to explore.</span></h1>
+                        <p>
+                            Web development, systems administration, enterprise
+                            networking and CRM automation - all current
+                            experience in one place.
+                        </p>
+                    </div>
                 </div>
-                <p>
-                    IT specialist of a wide front. Website development
-                    (WordPress). Building an enterprise network. Enterprise
-                    administration.
-                </p>
-
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <span>📧</span>
-                        <span>zazuleaweb@gmail.com</span>
-                    </div>
-                    <div class="contact-item">
-                        <span>📱</span>
-                        <span>+373 687 65 595</span>
-                    </div>
-                    <div class="contact-item">
-                        <span style="display: flex"
-                            ><img
-                                src="https://www.svgrepo.com/show/271142/telegram.svg"
-                                alt=""
-                                style="width: 100%; max-width: 20px"
-                        /></span>
-                        <span>@Zazull4</span>
-                    </div>
-
-                    <div class="contact-item">
-                        <span style="display: flex"
-                            ><img
-                                src="https://img.freepik.com/premium-vector/modern-x-logo-icon-black-square_1273375-1520.jpg"
-                                alt=""
-                                style="width: 100%; max-width: 20px"
-                        /></span>
-                        <span>@Zazull4</span>
-                    </div>
+                <div class="hero-side">
+                    <figure class="portrait">
+                        <img src="img.jpg" alt="Portrait of Alexandr Zazulea" />
+                        <figcaption>PROFILE / AVAILABLE</figcaption>
+                    </figure>
+                    <div class="signal" aria-hidden="true">
+                        <div class="signal-head">NETWORK / ONLINE</div>
+                        <div class="signal-stage">
+                            <i class="node node-a" data-id="WEB"></i>
+                            <i class="node node-b" data-id="SYS"></i>
+                            <i class="node node-c" data-id="CRM"></i>
+                            <i class="node node-d" data-id="SEC"></i>
+                        </div>
                     </div>
                 </div>
             </header>
 
-            <section class="section">
-                <h2 class="section-title">WORK EXPERIENCE</h2>
-                <div class="job">
-                    <div class="job-title">Content Manager, SEO Specialist</div>
-                    <div class="company">SRL CitesBun</div>
-                    <div class="period">2016 - 2019</div>
-                    <p>
-                        Handling social media campaign and managing team to
-                        handling social media timeline upload
-                    </p>
+            <section
+                class="terminal open-cv"
+                aria-label="Quick profile overview"
+            >
+                <div class="terminal-top">
+                    <i class="dot"></i><i class="dot dot-blue"></i
+                    ><span>terminal - profile</span>
                 </div>
-                <div class="job">
-                    <div class="job-title">Leading IT Specialist</div>
-                    <div class="company">SRL Balti-Gaz</div>
-                    <div class="period">2019 - present</div>
-                    <p>
-                        Setting up and administering Windows Server. Protection
-                        against hacking, viruses and information security
-                        support in the company. Direct participation in the
-                        design and construction of the local network.
-                        Maintaining enterprise web resources.
-                    </p>
-                </div>
-
-                <div class="job">
-                    <div class="job-title">Frontend Developer</div>
-                    <div class="company">Freelance (periodic)</div>
-                    <div class="period">2010 - present</div>
-                    <p>
-                        Web development projects including collaboration with
-                        international developers
-                    </p>
-                    <div class="terminal">
-                        <div class="terminal-header">
-                            ~/projects/latest_work $
-                        </div>
-                        <div>
-                            <a href="https://debridge.finance/"
-                                >https://debridge.finance/</a
-                            ><span class="cursor">_</span><br />
-                            <br />
-
-                            <a href="https://carteverde.md"
-                                >https://carteverde.md/</a
-                            ><span class="cursor">_</span><br />
-                            <br />
-
-                            <a href="https://2flwindowsandsiding.com"
-                                >https://2flwindowsandsiding.com/</a
-                            ><span class="cursor">_</span><br />
-                            <br />
-
-                            <a href="https://masterycabinetry.com"
-                                >https://masterycabinetry.com/</a
-                            ><span class="cursor">_</span><br />
-                            <br />
-
-                            <a href="https://montaco.md">https://montaco.md/</a
-                            ><span class="cursor">_</span><br />
-                            <br />
-
-                            <a href="https://thebox.md">https://thebox.md/</a
-                            ><span class="cursor">_</span><br />
-                            <br />
-                        </div>
+                <div class="terminal-body">
+                    <div>
+                        <p class="terminal-command">cat experience.txt</p>
+                        <small
+                            >Available for web, infrastructure and automation
+                            work.</small
+                        >
                     </div>
-                    <br />
-                    <br />
-                    <br />
-                    <div class="job-title">Frontend Developer</div>
-                    <div class="company">SRL "HumanSoft"</div>
-                    <div class="period">2023 - 2025</div>
-                    <p>
-                        Responsible for building new company websites from the
-                        ground up and maintaining existing platforms.
-                        Successfully completed and managed more than 20 diverse
-                        web projects, ensuring high performance, modern design,
-                        and long-term stability.
-                    </p>
-                    <div class="terminal">
-                        <div class="terminal-header">
-                            ~/projects/latest_work $
-                        </div>
-                        <div>
-                            <a href="https://talentisinterim.fr/"
-                                >https://talentisinterim.fr/</a
-                            ><span class="cursor">_</span><br />
-                            <br />
-                            <a href="https://agentia.md">https://agentia.md/</a
-                            ><span class="cursor">_</span><br />
-                            <br />
-                            <a href="https://cetarom.md">https://cetarom.md/</a
-                            ><span class="cursor">_</span> <br />
-                            <br />
-                            <a href="https://ara.md">https://ara.md/</a
-                            ><span class="cursor">_</span><br />
-                            <br />
-                            <a href="https://birja.md">https://birja.md/</a
-                            ><span class="cursor">_</span><br />
-                            <br />
-                            <a href="hhttps://moldo.md">https://moldo.md/</a
-                            ><span class="cursor">_</span><br />
-                            <br />
-                            <a href="https://andiva.md">https://andiva.md/</a
-                            ><span class="cursor">_</span><br />
-                            <br />
-                            <a href="https://andiva.ro">https://andiva.ro/</a
-                            ><span class="cursor">_</span><br />
-                        </div>
-                    </div>
+                    <a href="#experience">[ OPEN ]</a>
                 </div>
             </section>
 
-            <section class="section">
-                <h2 class="section-title">TECHNICAL SKILLS</h2>
-                <div class="skills-grid">
-                    <div class="skill-item">
-                        <h3>Frontend</h3>
-                        <p>HTML, CSS, JavaScript</p>
-                    </div>
-                    <div class="skill-item">
-                        <h3>Backend</h3>
-                        <p>PHP</p>
-                    </div>
-                    <div class="skill-item">
-                        <h3>CMS</h3>
-                        <p>WordPress</p>
-                    </div>
-                    <div class="skill-item">
-                        <h3>CRM</h3>
-                        <p>Kommo\Amo CRM</p>
-                    </div>
-                    <div class="skill-item">
-                        <h3>SEO</h3>
-                        <p>Base SEO Skills</p>
-                    </div>
-                    <div class="skill-item">
-                        <h3>Networking</h3>
-                        <p>Mikrotik, Cisco</p>
-                    </div>
-                    <div class="skill-item">
-                        <h3>Server Admin</h3>
-                        <p>Windows Server (All versions)</p>
-                    </div>
-                    <div class="skill-item">
-                        <h3>Security</h3>
-                        <p>Security Audit</p>
-                    </div>
+            <div class="cv-layout">
+                <aside class="side">
+                    <section class="terminal">
+                        <div class="terminal-top">
+                            <i class="dot"></i><span>terminal - contact</span>
+                        </div>
+                        <div class="terminal-body">
+                            <h2>contact</h2>
+                            <dl class="contact-list">
+                                <div>
+                                    <dt>email</dt>
+                                    <dd>
+                                        <a href="mailto:zazuleaweb@gmail.com"
+                                            >zazuleaweb@gmail.com</a
+                                        >
+                                    </dd>
+                                </div>
+                                <div>
+                                    <dt>phone</dt>
+                                    <dd>
+                                        <a href="tel:+37368765595"
+                                            >+373 687 65 595</a
+                                        >
+                                    </dd>
+                                </div>
+                                <div>
+                                    <dt>telegram</dt>
+                                    <dd>
+                                        <a href="https://t.me/Zazull4"
+                                            >@Zazull4</a
+                                        >
+                                    </dd>
+                                </div>
+                                <div>
+                                    <dt>x / twitter</dt>
+                                    <dd>
+                                        <a href="https://x.com/Zazull4"
+                                            >@Zazull4</a
+                                        >
+                                    </dd>
+                                </div>
+                            </dl>
+                        </div>
+                    </section>
+                    <section class="terminal">
+                        <div class="terminal-top">
+                            <i class="dot dot-blue"></i
+                            ><span>terminal - focus</span>
+                        </div>
+                        <div class="terminal-body">
+                            <h3>profile</h3>
+                            <dl class="meta-list">
+                                <div>
+                                    <dt>web</dt>
+                                    <dd>Frontend / WordPress</dd>
+                                </div>
+                                <div>
+                                    <dt>systems</dt>
+                                    <dd>Windows Server / Networking</dd>
+                                </div>
+                                <div>
+                                    <dt>automation</dt>
+                                    <dd>Kommo / amoCRM</dd>
+                                </div>
+                            </dl>
+                        </div>
+                    </section>
+                </aside>
+
+                <div class="main">
+                    <section class="section" id="experience">
+                        <div class="section-title">
+                            <span>01 /</span>
+                            <h2>Experience</h2>
+                        </div>
+                        <div class="experience">
+                            <article class="job">
+                                <div>
+                                    <div class="job-date">2019 - PRESENT</div>
+                                    <div class="job-company">SRL BALTI-GAZ</div>
+                                </div>
+                                <div>
+                                    <h3>Leading IT Specialist</h3>
+                                    <p>
+                                        Windows Server administration,
+                                        information security support, enterprise
+                                        network design and implementation, plus
+                                        maintenance of corporate web resources.
+                                    </p>
+                                </div>
+                            </article>
+                            <article class="job">
+                                <div>
+                                    <div class="job-date">2023 - 2025</div>
+                                    <div class="job-company">
+                                        SRL "HUMANSOFT"
+                                    </div>
+                                </div>
+                                <div>
+                                    <h3>Frontend Developer</h3>
+                                    <p>
+                                        Built new company websites and
+                                        maintained existing platforms.
+                                        Successfully delivered and managed more
+                                        than 20 web projects with an emphasis on
+                                        performance, contemporary design and
+                                        stability.
+                                    </p>
+                                    <div class="project-links">
+                                        <b>~/projects/humansoft $</b
+                                        ><a href="https://talentisinterim.fr/"
+                                            >talentisinterim.fr</a
+                                        ><a href="https://agentia.md"
+                                            >agentia.md</a
+                                        ><a href="https://cetarom.md"
+                                            >cetarom.md</a
+                                        ><a href="https://ara.md">ara.md</a
+                                        ><a href="https://birja.md">birja.md</a
+                                        ><a href="https://moldo.md">moldo.md</a
+                                        ><a href="https://andiva.md"
+                                            >andiva.md</a
+                                        ><a href="https://andiva.ro"
+                                            >andiva.ro</a
+                                        >
+                                    </div>
+                                </div>
+                            </article>
+                            <article class="job">
+                                <div>
+                                    <div class="job-date">2010 - PRESENT</div>
+                                    <div class="job-company">FREELANCE</div>
+                                </div>
+                                <div>
+                                    <h3>Frontend Developer</h3>
+                                    <p>
+                                        Web development projects, including
+                                        collaboration with international
+                                        development teams.
+                                    </p>
+                                    <div class="project-links">
+                                        <b>~/projects/freelance $</b
+                                        ><a href="https://debridge.finance/"
+                                            >debridge.finance</a
+                                        ><a href="https://carteverde.md"
+                                            >carteverde.md</a
+                                        ><a
+                                            href="https://2flwindowsandsiding.com"
+                                            >2flwindowsandsiding.com</a
+                                        ><a href="https://masterycabinetry.com"
+                                            >masterycabinetry.com</a
+                                        ><a href="https://montaco.md"
+                                            >montaco.md</a
+                                        ><a href="https://thebox.md"
+                                            >thebox.md</a
+                                        >
+                                    </div>
+                                </div>
+                            </article>
+                            <article class="job">
+                                <div>
+                                    <div class="job-date">2016 - 2019</div>
+                                    <div class="job-company">SRL CITESBUN</div>
+                                </div>
+                                <div>
+                                    <h3>Content Manager / SEO Specialist</h3>
+                                    <p>
+                                        Managed social media campaigns, content
+                                        publishing and a team responsible for
+                                        the content timeline.
+                                    </p>
+                                </div>
+                            </article>
+                        </div>
+                    </section>
+
+                    <section class="section" id="skills">
+                        <div class="section-title">
+                            <span>02 /</span>
+                            <h2>Technical skills</h2>
+                        </div>
+                        <div class="skills">
+                            <article class="skill">
+                                <div class="skill-label">frontend</div>
+                                <p>HTML, CSS and JavaScript.</p>
+                            </article>
+                            <article class="skill">
+                                <div class="skill-label">backend / cms</div>
+                                <p>PHP and WordPress.</p>
+                            </article>
+                            <article class="skill">
+                                <div class="skill-label">systems</div>
+                                <p>
+                                    Windows Server, MikroTik, Cisco and security
+                                    audit.
+                                </p>
+                            </article>
+                            <article class="skill">
+                                <div class="skill-label">crm</div>
+                                <p>
+                                    Kommo / amoCRM, REST API, OAuth 2.0 and
+                                    webhooks.
+                                </p>
+                            </article>
+                            <article class="skill">
+                                <div class="skill-label">lead capture</div>
+                                <p>
+                                    Forms, leads and contacts from WordPress
+                                    websites.
+                                </p>
+                            </article>
+                            <article class="skill">
+                                <div class="skill-label">automation</div>
+                                <p>
+                                    Pipelines, statuses, tasks and
+                                    notifications.
+                                </p>
+                            </article>
+                        </div>
+                    </section>
+
+                    <section class="section" id="education">
+                        <div class="section-title">
+                            <span>03 /</span>
+                            <h2>Education</h2>
+                        </div>
+                        <article class="education">
+                            <h3>Higher Education - Psychologist</h3>
+                            <p>USARB</p>
+                            <time>2007 - 2012</time>
+                        </article>
+                    </section>
                 </div>
-            </section>
+            </div>
 
-            <section class="section">
-                <h2 class="section-title">KOMMO / amoCRM INTEGRATION SKILLS</h2>
-                <div class="skills-grid">
-                    <div class="skill-item">
-                        <h3>API Integration</h3>
-                        <p>Kommo / amoCRM REST API, OAuth 2.0</p>
-                    </div>
-                    <div class="skill-item">
-                        <h3>Webhooks</h3>
-                        <p>Event processing and data synchronization</p>
-                    </div>
-                    <div class="skill-item">
-                        <h3>Website Lead Capture</h3>
-                        <p>Forms, leads and contacts from WordPress websites</p>
-                    </div>
-                    <div class="skill-item">
-                        <h3>Sales Automation</h3>
-                        <p>Pipelines, statuses, tasks and notifications</p>
-                    </div>
-                </div>
-            </section>
-
-            <section class="section">
-                <h2 class="section-title">EDUCATION</h2>
-                <div class="job">
-                    <div class="job-title">Higher Education - Psychologist</div>
-                    <div class="company">USARB</div>
-                    <div class="period">2007 - 2012</div>
-                </div>
-            </section>
-        </div>
-
-        <script>
-            // Matrix background effect
-            const canvas = document.getElementById('matrixCanvas');
-            const ctx = canvas.getContext('2d');
-
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-
-            const matrix =
-                'ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789@#$%^&*()*&^%+-/~{[|`]}';
-            const matrixArray = matrix.split('');
-
-            const fontSize = 10;
-            const columns = canvas.width / fontSize;
-            const drops = [];
-
-            for (let x = 0; x < columns; x++) {
-                drops[x] = 1;
-            }
-
-            function drawMatrix() {
-                ctx.fillStyle = 'rgba(0, 0, 0, 0.04)';
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-                ctx.fillStyle = '#00ff88';
-                ctx.font = fontSize + 'px courier';
-
-                for (let i = 0; i < drops.length; i++) {
-                    const text =
-                        matrixArray[
-                            Math.floor(Math.random() * matrixArray.length)
-                        ];
-                    ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-
-                    if (
-                        drops[i] * fontSize > canvas.height &&
-                        Math.random() > 0.975
-                    ) {
-                        drops[i] = 0;
-                    }
-                    drops[i]++;
-                }
-            }
-
-            setInterval(drawMatrix, 35);
-
-            // Floating icons
-            const icons = ['💻', '🔧', '🌐', '🔒', '⚙️', '📡', '🚀', '💾'];
-            const floatingContainer = document.getElementById('floatingIcons');
-
-            function createFloatingIcon() {
-                const icon = document.createElement('div');
-                icon.className = 'floating-icon';
-                icon.textContent =
-                    icons[Math.floor(Math.random() * icons.length)];
-                icon.style.left = Math.random() * 100 + '%';
-                icon.style.top = Math.random() * 100 + '%';
-                icon.style.animationDelay = Math.random() * 6 + 's';
-                icon.style.animationDuration = Math.random() * 4 + 4 + 's';
-
-                floatingContainer.appendChild(icon);
-
-                setTimeout(() => {
-                    icon.remove();
-                }, 10000);
-            }
-
-            setInterval(createFloatingIcon, 2000);
-
-            // Resize canvas on window resize
-            window.addEventListener('resize', () => {
-                canvas.width = window.innerWidth;
-                canvas.height = window.innerHeight;
-            });
-
-            // Add glitch effect to title on click
-            document
-                .querySelector('.header h1')
-                .addEventListener('click', function () {
-                    this.style.animation = 'none';
-                    this.style.transform = 'scale(1.1)';
-                    this.style.textShadow = '2px 0 #ff0000, -2px 0 #0000ff';
-
-                    setTimeout(() => {
-                        this.style.animation =
-                            'glow 2s ease-in-out infinite alternate';
-                        this.style.transform = 'scale(1)';
-                        this.style.textShadow = '0 0 20px #00ff88';
-                    }, 200);
-                });
-        </script>
+            <footer>
+                <span>Click a project to open it</span
+                ><span>zazull.github.io</span>
+            </footer>
+        </main>
     </body>
 </html>
